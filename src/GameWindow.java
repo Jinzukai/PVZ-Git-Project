@@ -10,7 +10,8 @@ public class GameWindow extends JFrame {
         None,
         Sunflower,
         Peashooter,
-        FreezePeashooter
+        FreezePeashooter,
+        Shovel
     }   
     
 
