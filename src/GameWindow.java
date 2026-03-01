@@ -6,16 +6,20 @@ import java.awt.event.ActionEvent;
  */
 public class GameWindow extends JFrame {
 
-    enum PlantType {
+    public enum PlantType {
         None,
         Sunflower,
         Peashooter,
         FreezePeashooter
-    }
+    }   
+    
 
     //PlantType activePlantingBrush = PlantType.None;
 
     public GameWindow() {
+        
+        new LevelData();
+        
         setSize(1012, 785);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
@@ -69,6 +73,7 @@ public class GameWindow extends JFrame {
     static GameWindow gw;
 
     public static void begin() {
+        LevelData.write("1");
         gw.dispose();
         gw = new GameWindow();
     }
