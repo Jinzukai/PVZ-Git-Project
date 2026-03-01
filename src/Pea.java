@@ -26,11 +26,9 @@ public class Pea {
                 if (z.getHealth() < 0) {
                     System.out.println("ZOMBIE DIED");
 
-                    gp.getLaneZombies().get(myLane).remove(i);
-                    GamePanel.setProgress(10);
                     exit = true;
                 }
-                gp.getLaneZombies().get(myLane).remove(this);
+                gp.getLanePeas().get(myLane).remove(this);
                 if (exit) break;
             }
         }
