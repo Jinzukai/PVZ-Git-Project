@@ -1,68 +1,58 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+public class Collider extends JPanel {
 
-/**
- * Created by Armin on 6/25/2016.
- */
-public class Collider extends JPanel implements MouseListener {
-
-    private ActionListener al;
+    private ActionListener actionListener;
+    private Plant assignedPlant;
 
     public Collider() {
-        //setBorder(new LineBorder(Color.RED));
         setOpaque(false);
-        addMouseListener(this);
-        //setBackground(Color.green);
         setSize(100, 120);
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (actionListener != null) {
+                    actionListener.actionPerformed(
+                        new ActionEvent(this,
+                                ActionEvent.ACTION_PERFORMED,
+                                "")
+                    );
+                }
+            }
+        });
     }
 
-    public Plant assignedPlant;
-
-    public void setPlant(Plant p) {
-        assignedPlant = p;
+    public boolean setPlant(Plant plant) {
+        if (assignedPlant == null) {
+            assignedPlant = plant;
+            return true;
+        }
+        plant.stop();
+        return false;
     }
 
     public void removePlant() {
-        assignedPlant.stop();
-        assignedPlant = null;
-    }
-
-    public boolean isInsideCollider(int tx) {
-        return (tx > getLocation().x) && (tx < getLocation().x + 100);
-    }
-
-    public void setAction(ActionListener al) {
-        this.al = al;
-    }
-
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        if (al != null) {
-            al.actionPerformed(new ActionEvent(this, ActionEvent.RESERVED_ID_MAX + 1, ""));
+        if (assignedPlant != null) {
+            assignedPlant.stop();
+            assignedPlant = null;
+            repaint();
         }
     }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
+    public Plant getAssignedPlant() {
+        return assignedPlant;
     }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
-
+    public void setAction(ActionListener al) {
+        this.actionListener = al;
     }
+
+    public boolean isInsideCollider(int tx) {
+        return tx > getX() && tx < getX() + getWidth();
+    }
+    
 }
