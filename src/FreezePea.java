@@ -21,8 +21,7 @@ public class FreezePea extends Pea {
                 boolean exit = false;
                 if (z.getHealth() < 0) {
                     System.out.println("ZOMBIE DIE");
-                    GamePanel.setProgress(10);
-                    gp.getLaneZombies().get(getMyLane()).remove(i);
+
                     exit = true;
                 }
                 gp.getLanePeas().get(getMyLane()).remove(this);
@@ -32,7 +31,7 @@ public class FreezePea extends Pea {
         /*if(posX > 2000){
             gp.lanePeas.get(myLane).remove(this);
         }*/
-        setPosX(getPosX() - 15);
+        setPosX(getPosX() + 15);
     }
 
 }
