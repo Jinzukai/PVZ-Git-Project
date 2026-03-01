@@ -7,4 +7,9 @@ public class ConeHeadZombie extends Zombie {
         super(parent, lane);
         setHealth(1800);
     }
+    
+    @Override
+    public int getScore() {
+        return 10;
+    }
 }
