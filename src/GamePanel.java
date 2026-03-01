@@ -6,18 +6,53 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Random;
-
+import java.net.URL;
+import java.awt.Shape;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.awt.event.MouseAdapter;
+import java.awt.image.BufferedImage;
+import javax.swing.border.Border;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 /**
  * Created by Armin on 6/25/2016.
  */
-public class GamePanel extends JLayeredPane implements MouseMotionListener {
+public class GamePanel extends JPanel implements MouseMotionListener {
 
+    private boolean finalWaveShown = false;
+    private boolean showFinalWaveText = false;
+    private int zombieSpawnedCount = 0;
+    private final int MAX_ZOMBIES = 10;
+    private boolean waitingToFinish = false;
+    private long finishStartTime;
+    private boolean levelFinished = false;
+    private Shape finalWaveShape;
+    private Shape gameOverShape;
+    
+    public boolean isPaused() {
+    return isPaused;
+    }
+
+    public boolean isLevelFinished() {
+        return levelFinished;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+    
+    private long finalWaveStartTime;
+    private JButton shovelBtn;
     private Image bgImage;
     private Image peashooterImage;
     private Image freezePeashooterImage;
     private Image sunflowerImage;
     private Image peaImage;
     private Image freezePeaImage;
+    private Image shovelImage;
+    private Image shovelIcon;
+
 
     private Image normalZombieImage;
     private Image coneHeadZombieImage;
